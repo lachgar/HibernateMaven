@@ -25,7 +25,13 @@ public class TestProduit {
         
         for(Produit p : ps.findByCategorie(cs.findById(2)))
             System.out.println(p.getNom());
-            
+
+        for(Produit p: ps.findBetweenDates(new Date("2020/01/01"),new Date("2025/01/01")))
+            System.out.println(p.getNom()+" : "+p.getDateAchat()+" ");
+
+        for (Produit p : ps.findByPrix(9000))
+            System.out.println(p.getNom()+" : "+p.getPrix()+" ");
     }
+
     
 }

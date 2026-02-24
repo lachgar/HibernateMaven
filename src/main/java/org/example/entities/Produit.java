@@ -6,14 +6,7 @@
 package org.example.entities;
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  *
@@ -21,7 +14,13 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-@NamedQuery(name = "findByCategory", query = "from Produit where categorie =:categorie")
+@NamedQueries({
+        @NamedQuery(name = "findByCategory", query = "from Produit where categorie =:categorie"),
+        @NamedQuery(name = "findBetweenDates", query = "from Produit where dateAchat between :d1 and :d2")
+})
+
+@NamedNativeQuery(name = "findByPrix", query = "select * from Produit where prix > :prix", resultClass =  Produit.class)
+
 public class Produit {
     
     @Id
